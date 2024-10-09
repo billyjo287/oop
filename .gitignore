@@ -1,0 +1,23 @@
+# to ignore XAMPP specific files, you use the following code
+xampp/
+
+# the following code helps to Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# To ignore PHPStorm or VSCode specific files
+.vscode/
+.idea/
+
+# this code helps to ignore environment variables
+.env
+
+# to ignore compiled files
+*.class
+*.log
+
+# this code helps to ignore vendor directory if using Composer
+vendor/
+
+# this code helps to ignore node_modules if using Node.js
+node_modules/
