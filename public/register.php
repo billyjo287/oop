@@ -45,6 +45,8 @@
             <span id="password_error" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
+
+        <p class="mt-3">Already have an account? <a href="login.php.php">Login here</a></p>
     </form>
 </div>
 </body>
