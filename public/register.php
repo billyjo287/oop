@@ -1,3 +1,44 @@
+<?php
+// public/register.php
+session_start();
+require '../backhand/Database.php';
+require '../backhand/user.php';
+require '../backhand/send_otp.php';
+
+$error_message = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // To check if the password in the password field and the password in the confirm password field matches
+    if ($_POST['password'] !== $_POST['confirm_password']) {
+        $error_message = "Passwords do not match!";
+    } else {
+        $database = new Database();
+        $db = $database->getConnection();
+
+        $user = new User($db);
+
+        $username = htmlspecialchars(strip_tags($_POST['username']));
+        $email = htmlspecialchars(strip_tags($_POST['email']));
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+        $otp = rand(000000, 999999); // To generate a 6 digits random number between 000000 and 999999
+
+        // To create a user
+        if ($user->create($username, $email, $password, $otp)) {
+            // Send OTP to user's email
+            if (sendOTP($email, $otp)) {
+                $_SESSION['email'] = $email;
+                header("Location: verify_otp.php");
+                exit();
+            } else {
+                $error_message = "Failed to send OTP. Please try again.";
+            }
+        } else {
+            $error_message = "Email already registered or error creating user.";
+        }
+    }
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
