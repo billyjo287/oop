@@ -14,15 +14,16 @@ function sendOTP($email, $otp) {
         $mail->Host = 'smtp.gmail.com'; 
         $mail->SMTPAuth = true;
         $mail->Username = 'igiranezabilly400@gmail.com'; 
-        $mail->Password = 'billyjohn123@'; 
+        $mail->Password = 'buip mdoj demc vfpn';    
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // The Recipient
-        $mail->setFrom('your_email@gmail.com', 'Your Name'); // Update as needed
-        $mail->addAddress($email); // Add recipient
+    
+        $mail->setFrom('your_email@gmail.com', 'Billyjo287');
+        $mail->addAddress($email);
+// The content
 
-        // The Content
         $mail->isHTML(true);
         $mail->Subject = 'Your OTP Code';
         $mail->Body = "Your OTP code is: <b>$otp</b>";
@@ -30,8 +31,9 @@ function sendOTP($email, $otp) {
         $mail->send();
         return true;
     } catch (Exception $e) {
-        // If the email fails, it returns false 
-        return false; 
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return false;
     }
 }
+
 ?>
