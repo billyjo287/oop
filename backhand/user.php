@@ -1,6 +1,6 @@
 <?php
 
-require 'Database.php';
+require_once 'Database.php';
 
 class User {
     private $conn;
@@ -15,7 +15,7 @@ class User {
         $query = "INSERT INTO " . $this->table_name . " (username, email, password, otp) VALUES (:username, :email, :password, :otp)";
         $stmt = $this->conn->prepare($query);
 
-        // To sanitize
+        // to sanitize inputs
         $username = htmlspecialchars(strip_tags($username));
         $email = htmlspecialchars(strip_tags($email));
         $password = htmlspecialchars(strip_tags($password));
@@ -28,11 +28,7 @@ class User {
         $stmt->bindParam(':otp', $otp);
 
         // To execute the query
-        if ($stmt->execute()) {
-            return true;
-        }
-
-        return false;
+        return $stmt->execute();
     }
 
     // To Validate OTP
@@ -40,7 +36,7 @@ class User {
         $query = "SELECT * FROM " . $this->table_name . " WHERE email = :email AND otp = :otp AND is_verified = 0";
         $stmt = $this->conn->prepare($query);
 
-        // To sanitize
+        //To sanitize
         $email = htmlspecialchars(strip_tags($email));
         $otp = htmlspecialchars(strip_tags($otp));
 
@@ -52,7 +48,7 @@ class User {
         return $stmt->rowCount() > 0;
     }
 
-    // Updating user to verified state
+    // Updatind the user to the verified state
     public function verifyUser($email) {
         $query = "UPDATE " . $this->table_name . " SET is_verified = 1, otp = NULL WHERE email = :email";
         $stmt = $this->conn->prepare($query);
@@ -63,11 +59,7 @@ class User {
         // To bind values
         $stmt->bindParam(':email', $email);
 
-        if ($stmt->execute()) {
-            return true;
-        }
-
-        return false;
+        return $stmt->execute();
     }
 }
 ?>
