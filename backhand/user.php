@@ -10,26 +10,32 @@ class User {
         $this->conn = $db;
     }
 
-    // To Create user
+    // To Create a user
     public function create($username, $email, $password, $otp) {
+        // To Check if email already exists
+        if ($this->emailExists($email)) {
+            return false; 
+        }
+    
         $query = "INSERT INTO " . $this->table_name . " (username, email, password, otp) VALUES (:username, :email, :password, :otp)";
         $stmt = $this->conn->prepare($query);
-
+    
         // to sanitize inputs
         $username = htmlspecialchars(strip_tags($username));
         $email = htmlspecialchars(strip_tags($email));
         $password = htmlspecialchars(strip_tags($password));
         $otp = htmlspecialchars(strip_tags($otp));
-
+    
         // To bind values
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':otp', $otp);
-
+    
         // To execute the query
         return $stmt->execute();
     }
+    
 
     // To Validate OTP
     public function validateOtp($email, $otp) {
@@ -61,5 +67,15 @@ class User {
 
         return $stmt->execute();
     }
+    public function emailExists($email) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+        $email = htmlspecialchars(strip_tags($email));
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        
+        return $stmt->rowCount() > 0;
+    }
+    
 }
 ?>
