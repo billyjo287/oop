@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else {
             $error_message = "Email already registered or error creating user.";
-        }
+        }   
+             
     }
 }
 ?>
