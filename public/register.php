@@ -4,7 +4,6 @@ require_once '../backhand/Database.php';
 require_once '../backhand/User.php';
 require_once '../backhand/send-otp.php'; 
 
-
 $error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -35,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $error_message = "Email already registered or error creating user.";
         }   
-             
     }
 }
 ?>
@@ -44,11 +42,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       
+        body {
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .register-container {
+            background-color: #212529; 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            background-color: #495057;
+            color: white;
+            border: 1px solid #6c757d;
+        }
+        .form-control:focus {
+            background-color: #495057;
+            color: white;
+            box-shadow: none;
+            border-color: #80bdff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .alert {
+            background-color: #dc3545;
+            color: white;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-link a {
+            color: #80bdff;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
+
+<div class="register-container">
     <h2>Register</h2>
     <?php if ($error_message): ?>
         <div class="alert alert-danger"><?php echo $error_message; ?></div>
@@ -72,7 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
-    <p class="mt-3">Already have an account? <a href="login.php">Login here</a></p>
+    <p class="login-link">Already have an account? <a href="login.php">Login here</a></p>
 </div>
+
 </body>
 </html>
