@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once '../backhand/Database.php';
-require_once '../backhand/User.php';
-require_once '../backhand/send-otp.php'; 
+require_once '../private/Database.php';
+require_once '../private/User.php';
+require_once '../private/send-otp.php'; 
 
 $error_message = '';
 

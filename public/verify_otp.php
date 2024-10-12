@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../backhand/Database.php'; 
-require_once '../backhand/User.php'; 
+require_once '../private/Database.php'; 
+require_once '../private/User.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $otp = htmlspecialchars(strip_tags($_POST['otp']));

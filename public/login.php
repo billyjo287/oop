@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../backhand/Database.php';
-require_once '../backhand/User.php';
+require_once '../private/Database.php';
+require_once '../private/User.php';
 
 $error_message = '';
 
